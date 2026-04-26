@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rp-toolkit"
+version = "0.1.0"
+description = "Toolkit de radioprotection: dose, attenuation, decroissance et ALARA"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "RP Toolkit Contributors" }
+]
+dependencies = [
+  "radioactivedecay>=0.6.1",
+  "numpy>=1.26.0",
+  "pandas>=2.2.0",
+  "matplotlib>=3.8.0",
+  "streamlit>=1.35.0",
+  "openpyxl>=3.1.2",
+  "reportlab>=4.2.0"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.2.0",
+  "pytest-cov>=5.0.0",
+  "ruff>=0.6.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["rp_toolkit*"]
+
+[tool.setuptools.package-data]
+"rp_toolkit.data" = ["*.json"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
