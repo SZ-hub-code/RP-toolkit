@@ -41,6 +41,8 @@ def plot_isodose_2d(
     min_radius_m: float = 0.05,
 ) -> tuple[plt.Figure, plt.Axes]:
     """Plot a 2D isodose map in a horizontal plane around a point source."""
+    if activity_bq < 0:
+        raise ValueError("Activity must be non-negative.")
     if extent_m <= 0:
         raise ValueError("extent_m must be strictly positive.")
     if resolution < 20:

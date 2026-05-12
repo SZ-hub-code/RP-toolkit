@@ -91,7 +91,7 @@ def required_thickness(
     if buildup_factor <= 0:
         raise ValueError("buildup_factor must be strictly positive.")
 
-    numerator = math.log(attenuation_factor) - math.log(buildup_factor)
+    numerator = math.log(attenuation_factor) + math.log(buildup_factor)
     return max(0.0, numerator / mu_m_inv)
 
 

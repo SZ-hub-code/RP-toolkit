@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections import defaultdict
 from pathlib import Path
 
 import pandas as pd
@@ -53,7 +54,21 @@ def validate_measurements_schema(dataframe: pd.DataFrame) -> None:
 def read_measurements_csv(file_path: str | Path, sep: str = ",", decimal: str = ".") -> pd.DataFrame:
     """Load and normalize measurement CSV with lightweight schema checks."""
     dataframe = pd.read_csv(file_path, sep=sep, decimal=decimal)
-    dataframe = dataframe.rename(columns={col: _normalize_column_name(col) for col in dataframe.columns})
+    original_columns = [str(column) for column in dataframe.columns]
+    normalized_columns = [_normalize_column_name(column) for column in original_columns]
+
+    normalization_map = defaultdict(list)
+    for original, normalized in zip(original_columns, normalized_columns):
+        normalization_map[normalized].append(original)
+
+    duplicate_columns = {name: originals for name, originals in normalization_map.items() if len(originals) > 1}
+    if duplicate_columns:
+        collisions = "; ".join(
+            f"{normalized} <- {', '.join(originals)}" for normalized, originals in sorted(duplicate_columns.items())
+        )
+        raise ValueError(f"Column normalization produced duplicate columns: {collisions}")
+
+    dataframe.columns = normalized_columns
 
     if "timestamp" in dataframe.columns:
         dataframe["timestamp"] = pd.to_datetime(dataframe["timestamp"], errors="coerce")

@@ -20,7 +20,7 @@ Option editable (recommande en dev):
 pip install -e .
 ```
 
-Option requirements pinnes:
+Option requirements pinned:
 
 ```bash
 pip install -r requirements.txt

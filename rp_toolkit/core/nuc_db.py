@@ -101,6 +101,9 @@ class Nuclide:
 
     def n_half_lives(self, t: float, unit: str = "d") -> float:
         """Number of elapsed half-lives during t."""
+        if unit not in SECONDS_PER:
+            supported_units = ", ".join(sorted(SECONDS_PER))
+            raise ValueError(f"Unsupported unit '{unit}'. Supported units: {supported_units}.")
         t_s = t * SECONDS_PER[unit]
         t_half_s = self.half_life("s")
         if t_half_s == float("inf"):
