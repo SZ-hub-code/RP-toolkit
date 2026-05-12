@@ -1,0 +1,29 @@
+{
+  "ICRP": {
+    "occupational_mSv_per_year": 20.0,
+    "public_mSv_per_year": 1.0,
+    "lens_mSv_per_year": 20.0,
+    "skin_mSv_per_year": 500.0,
+    "extremities_mSv_per_year": 500.0
+  },
+  "UE": {
+    "occupational_mSv_per_year": 20.0,
+    "public_mSv_per_year": 1.0
+  },
+  "FR": {
+    "occupational_mSv_per_year": 20.0,
+    "public_mSv_per_year": 1.0,
+    "classified_worker_category_a_mSv_per_year": 6.0,
+    "classified_worker_category_b_mSv_per_year": 1.0
+  },
+  "CH": {
+    "occupational_mSv_per_year": 20.0,
+    "public_mSv_per_year": 1.0
+  },
+  "zone_thresholds_uSv_h": {
+    "public_area": 2.5,
+    "supervised_area": 7.5,
+    "controlled_area": 25.0,
+    "high_radiation_area": 100.0
+  }
+}
